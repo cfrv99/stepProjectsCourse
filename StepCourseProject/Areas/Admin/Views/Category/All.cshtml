@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CategoriesVM>
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1>All</h1>
+<h3><a href="/Admin/Category/Create" class="btn btn-light">Create New Category</a></h3>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{ int i = 0; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@(i + 1)</th>
+                <td><a asp-action="Details" asp-controller="Category" asp-route-id="@item.Id">@item.Name</a></td>
+
+                <td><a class="btn btn-success" href="#">Edit</a></td>
+                <form action="/Admin/Category/Delete" method="post">
+                    <input type="hidden" name="id" id="id" value="@item.Id" />
+                    <td><input type="submit" class="btn bg-danger" style="color:white" value="Delete" /></td>
+                </form>
+
+            </tr>
+
+            <div style="visibility:hidden">@(i++)</div>
+        }
+
+    </tbody>
+</table>
